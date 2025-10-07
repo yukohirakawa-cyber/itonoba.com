@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itonoba - Learn About Japan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        .logo {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav a:hover {
+            color: #BC002D;
+            border-bottom: 2px solid #e4d8da
+        }
+
+        .nav-cta {
+            background: #BC002D;
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 4px;
+        }
+
+        .language-switch {
+            display: flex;
+            gap: 10px;
+            padding-left: 20px;
+            border-left: 1px solid #E8E8E8;
+        }
+
+        .language-switch a {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .language-switch a.active {
+            background: #F5F5F5;
+            color: #BC002D;
+        }
+
+        .hero {
+            height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content .catchcopy {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 30px 0 40px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #BC002D;
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.1em;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(188, 0, 45, 0.4);
+            border-radius: 40px;
+        }
+
+        .cta-button:hover {
+            background: #A00027;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 20px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #BC002D;
+            margin: 20px auto 0;
+        }
+
+        .features {
+            background: #FAFAF8;
+            padding: 80px 0;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 0;
+            padding: 0 40px;
+        }
+
+        .feature-item.reverse {
+            direction: rtl;
+        }
+
+        .feature-item.reverse>* {
+            direction: ltr;
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 400px;
+            background: #F0F0F0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-content h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 700;
+            padding-left: 20px;
+            border-left: 4px solid #BC002D;
+        }
+
+        .feature-content p {
+            color: #666;
+            line-height: 1.9;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon-text {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .categories {
+            background: white;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .category-item {
+            background: #FAFAF8;
+            padding: 35px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            border-color: #BC002D;
+            box-shadow: 0 8px 20px rgba(188, 0, 45, 0.1);
+        }
+
+        .category-emoji {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .category-item h3 {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .pricing {
+            background: #FAFAF8;
+            padding: 20px 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card.featured {
+            border-color: #6a021af4;
+        }
+
+        .badge {
+            background: #6a021af4;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .plan-name {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            margin: 30px 0;
+        }
+
+        .amount {
+            font-size: 4em;
+            font-weight: 700;
+            color: #6a021af4;
+        }
+
+        .period {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            color: #333;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .plan-button {
+            display: block;
+            background: #6a021af4;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        .travel-benefits {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFE8CC 100%);
+            padding: 20px 10px;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto 50px;
+        }
+
+        .partner-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #F39C12;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .partner-card h4 {
+            font-size: 1.4em;
+            color: #333;
+            margin: 10px 0 15px;
+        }
+
+        .partner-card p {
+            color: #666;
+        }
+
+        .tutors {
+            background: white;
+        }
+
+        .tutor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        .tutor-card {
+            background: #FAFAF8;
+            padding: 35px 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tutor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(188, 0, 45, 0.1);
+        }
+
+        .tutor-image {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .tutor-name {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .tutor-specialty {
+            font-size: 1.05em;
+            color: #BC002D;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .tutor-bio {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .tutor-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        .testimonials {
+            background: #FAFAF8;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            border-top: 3px solid #BC002D;
+        }
+
+        .quote-mark {
+            font-size: 4em;
+            color: #BC002D;
+            opacity: 0.15;
+            line-height: 0.8;
+        }
+
+        .testimonial-text {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .testimonial-author {
+            padding-top: 20px;
+            border-top: 2px solid #E8E8E8;
+        }
+
+        .author-info strong {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .author-info span {
+            color: #BC002D;
+            font-size: 0.9em;
+        }
+
+        .faq {
+            background: white;
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #FAFAF8;
+            padding: 30px 35px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #BC002D;
+        }
+
+        .faq-question {
+            font-size: 1.15em;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            background: linear-gradient(299deg, #dccb42e3, #e07a58);
+            color: white;
+            text-align: center;
+            padding: 20px 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+/* フッタースタイル */
+.footer {
+    background: linear-gradient(135deg, #213408bd 100%, #6d6d13 40%);
+    color: #ecf0f1;
+    padding: 60px 20px 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-about {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #e74c3c;
+    padding: 30px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+}
+
+.footer-about h3 {
+    color: #e74c3c;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-about p {
+    line-height: 1.8;
+    color: #bdc3c7;
+    margin-bottom: 10px;
+}
+
+.footer-about .tagline {
+    color: #ecf0f1;
+    font-weight: 500;
+    font-style: italic;
+    margin-top: 15px;
+    font-size: 1.05rem;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column h4 {
+    color: #e74c3c;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #e74c3c;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+.lang-switch {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.lang-switch button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ecf0f1;
+    padding: 8px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.lang-switch button:hover,
+.lang-switch button.active {
+    background: #e74c3c;
+    border-color: #e74c3c;
+}
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+            .feature-item {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item.reverse {
+                direction: ltr;
+            }
+
+            .category-grid,
+            .pricing-grid,
+            .partner-grid,
+            .tutor-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="images/itonoba_logo.jpg" alt="logo">
+            </a>
+            <nav class="nav">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#tutors">Tutors</a>
+                <a href="#faq">FAQ</a>
+                <div class="language-switch">
+                    <a href="INDEX_jp.html">JP</a>
+                    <a href="#" class="active">EN</a>
+                </div>
+                <a href="#" class="nav-cta">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-background">
+            <img src="images/Black.jpg" alt="hero-background">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Connect with Real<br>Japanese People</h1>
+            <p class="catchcopy">Your Japan begins with hello</p>
+            <a href="#" class="cta-button">Start Learning Today</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="section">
+            <h2 class="section-title">Why Choose Itonoba?</h2>
+
+            <div class="feature-item">
+                <div class="feature-content">
+                    <div class="feature-icon-text">👥</div>
+                    <h3>1-on-1 Personal Learning</h3>
+                    <p>No crowds, no pressure. Focus on exactly what you want to learn with dedicated attention.</p>
+                </div>
+                <div class="feature-image">
+                    <img src="images/White.jpg" alt="1-on-1"><br>
+                </div>
+            </div>
+            <div class="feature-item reverse">
+                <div class="feature-content">
+                    <div class="feature-icon-text">🗣️</div>
+                    <h3>Talk with Real Japanese</h3>
+                    <p>Connect with native speakers passionate about sharing their culture.</p>
+                </div>
+                <div class="feature-image">
+                    <img src="images/Cooking.jpg" alt="cooking image"><br>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-content">
+                    <div class="feature-icon-text">🌐</div>
+                    <h3>No Language Barrier</h3>
+                    <p>AI-powered translation ensures smooth communication.</p>
+                </div>
+                <div class="feature-image">
+                    <img src="images/AI.jpg" alt="AI image"><br>
+                </div>
+            </div>
+    </section>
+
+    <section id="categories" class="section categories">
+        <h2 class="section-title">Explore Japanese Culture</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <div class="category-emoji">⛩️</div>
+                <h3>Temples & Shrines</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">🎌</div>
+                <h3>Anime & Manga</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">👘</div>
+                <h3>Kimono & Fashion</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">🍣</div>
+                <h3>Japanese Cuisine</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">🎨</div>
+                <h3>Traditional Arts</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">🏯</div>
+                <h3>History & Culture</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">🎮</div>
+                <h3>Gaming Culture</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-emoji">🌸</div>
+                <h3>Seasonal Events</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="section">
+            <h2 class="section-title">Simple & Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Pay Per Session</div>
+                    <div class="price"><span class="amount">¥1,800</span><span class="period">/30min</span></div>
+                    <ul class="plan-features">
+                        <li>✓ 30-minute sessions</li>
+                        <li>✓ Extend anytime</li>
+                        <li>✓ All tutors</li>
+                        <li>✓ Travel discounts</li>
+                    </ul>
+                    <a href="#" class="plan-button">Book Now</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="badge">Best Value</div>
+                    <div class="plan-name">Unlimited Monthly</div>
+                    <div class="price"><span class="amount">¥19,800</span><span class="period">/month</span></div>
+                    <ul class="plan-features">
+                        <li>✓ Unlimited sessions</li>
+                        <li>✓ Priority booking</li>
+                        <li>✓ Extended benefits</li>
+                        <li>✓ Cancel anytime</li>
+                    </ul>
+                    <a href="#" class="plan-button">Start Unlimited</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="travel-benefits">
+        <div class="section">
+            <h2 class="section-title">🎁 Exclusive Travel Benefits</h2>
+            <div class="partner-grid">
+                <div class="partner-card">
+                    <div class="discount-badge">20% OFF</div>
+                    <h4>⛩️ Temples & Shrines</h4>
+                    <p>Major temples nationwide</p>
+                </div>
+                <div class="partner-card">
+                    <div class="discount-badge">15% OFF</div>
+                    <h4>👘 Kimono Rentals</h4>
+                    <p>Premium shops in Kyoto/Tokyo</p>
+                </div>
+                <div class="partner-card">
+                    <div class="discount-badge">10% OFF</div>
+                    <h4>🍜 Restaurants</h4>
+                    <p>Authentic Japanese cuisine</p>
+                </div>
+                <div class="partner-card">
+                    <div class="discount-badge">25% OFF</div>
+                    <h4>🎨 Cultural Experiences</h4>
+                    <p>Tea ceremony, calligraphy</p>
+                </div>
+                <div class="partner-card">
+                    <div class="discount-badge">15% OFF</div>
+                    <h4>🏯 Museums & Gardens</h4>
+                    <p>National museums</p>
+                </div>
+                <div class="partner-card">
+                    <div class="discount-badge">Special</div>
+                    <h4>🎫 Events & Shows</h4>
+                    <p>Traditional performances</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tutors" class="section tutors">
+        <h2 class="section-title">Meet Our Tutors</h2>
+        <div class="tutor-grid">
+            <div class="tutor-card">
+                <div class="tutor-image">👘</div>
+                <h3 class="tutor-name">Yuki Tanaka</h3>
+                <p class="tutor-specialty">Kimono & Fashion</p>
+                <p class="tutor-bio">20+ years experience in kimono styling.</p>
+                <div class="tutor-stats"><span>⭐ 4.9/5</span><span>💬 200+</span></div>
+            </div>
+            <div class="tutor-card">
+                <div class="tutor-image">⛩️</div>
+                <h3 class="tutor-name">Hiroshi Sato</h3>
+                <p class="tutor-specialty">Temples & Shrines</p>
+                <p class="tutor-bio">Retired priest with 40 years experience.</p>
+                <div class="tutor-stats"><span>⭐ 5.0/5</span><span>💬 350+</span></div>
+            </div>
+            <div class="tutor-card">
+                <div class="tutor-image">🎌</div>
+                <h3 class="tutor-name">Akiko Suzuki</h3>
+                <p class="tutor-specialty">Anime & Pop Culture</p>
+                <p class="tutor-bio">Professional manga artist, 15 years.</p>
+                <div class="tutor-stats"><span>⭐ 4.8/5</span><span>💬 180+</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials">
+        <h2 class="section-title">What Our Users Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">So intuitive! I learned about tea ceremony before my Kyoto trip.</p>
+                <div class="testimonial-author">
+                    <div class="author-info"><strong>Sarah M.</strong><span>🇺🇸 USA</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">My tutor was so patient. Now I understand Japanese culture better.</p>
+                <div class="testimonial-author">
+                    <div class="author-info"><strong>Marcus L.</strong><span>🇩🇪 Germany</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">Perfect for anime culture! My tutor's passion was infectious.</p>
+                <div class="testimonial-author">
+                    <div class="author-info"><strong>Emma K.</strong><span>🇬🇧 UK</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section faq">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3 class="faq-question">📱 Can I use on my phone?</h3>
+                <p class="faq-answer">Yes! Works on all devices, no app needed.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">🗣️ What if I don't speak Japanese?</h3>
+                <p class="faq-answer">AI translation ensures smooth communication.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">⏰ How long are sessions?</h3>
+                <p class="faq-answer">30 minutes, extendable during session.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">🎁 How do travel discounts work?</h3>
+                <p class="faq-answer">Digital pass gives discounts at 200+ locations in Japan.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">🔄 Can I cancel?</h3>
+                <p class="faq-answer">Yes, up to 24 hours before for full refund.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">🌏 Need to be in Japan?</h3>
+                <p class="faq-answer">No! Available worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Start Your Japan Journey</h2>
+        <p>Join thousands discovering real Japan</p>
+        <a href="#" class="cta-button">Get Started Free</a>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Service Concept -->
+            <div class="footer-about">
+                <h3>About Itonoba.com</h3>
+                <p id="about-text">
+                "Itonoba?.com is an online platform that brings the authentic practices of Japanese culture to people around the world.From kimono dressing, miso and koji making, and traditional seasonal cuisine such as osechi,to the etiquette at sacred shrines and temples, and even anime culture—we share the living spirit and everyday artistry of Japan.By deepening cultural understanding, we aim to reduce overtourism and foster sustainable international exchange.",
+                </p>
+                <p class="tagline" id="tagline">
+                    Just like a thread (ito) connecting people and culture, we spin genuine Japan into the world.
+                </p>
+                <div class="lang-switch">
+                    <button class="active" onclick="switchLang('en')">English</button>
+                    <button onclick="switchLang('ja')">Japanese</button>
+                </div>
+            </div>
+
+            <!-- Footer Links -->
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Itonoba.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const content = {
+            en: {
+                text: "Itonoba.com is an online platform that brings the authentic practices of Japanese culture to people around the world.From kimono dressing, miso and koji making, and traditional seasonal cuisine such as osechi,to the etiquette at sacred shrines and temples, and even anime culture—we share the living spirit and everyday artistry of Japan.By deepening cultural understanding, we aim to reduce overtourism and foster sustainable international exchange.",
+                tagline: "Just like a thread (ito) connecting people and culture, we spin genuine Japan into the world."
+            },
+            ja: {
+                text: "Itonoba.comは、日本文化の本物の作法を世界中の人々に届けるオンラインプラットフォームです。着付け、味噌や麹作り、お節などの季節料理作り、神社・寺院の神聖な場所での作法、アニメ文化まで、日本の「営み」や作法を共有します。私たちは文化の理解を深めることで、観光公害を減らし、持続可能な国際交流を目指します。",
+                tagline: "糸（ito）で人と文化を結び、世界中に本物の日本を紡ぐ。"
+            }
+        };
+
+        function switchLang(lang) {
+            document.getElementById('about-text').textContent = content[lang].text;
+            document.getElementById('tagline').textContent = content[lang].tagline;
+            
+            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
